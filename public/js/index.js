@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const res = await fetch("http://localhost:27655/comments", {
+                const res = await fetch("https://chefwallet2.onrender.com/comments", {
     method: "POST",
     credentials: "include", 
     headers: {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     async function loadComments(){
         try {
-            const res = await fetch("http://localhost:27655/comments");
+            const res = await fetch("https://chefwallet2.onrender.com/comments");
             const data = await res.json();
             
             if(!data.success){ 
