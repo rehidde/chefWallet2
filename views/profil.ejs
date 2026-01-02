@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>chefWallet | Profilim</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/prefil.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+        <a href="/">Ana Sayfa</a>
+        <a href="/tarifler">Tarifler</a>
+        <a href="/market">Market</a>
+        <a href="/hakkimizda">Hakkımızda</a>
+        <a href="/iletisim">İletişim</a>
+    </nav>
+
+    <div class="user-actions">
+        <span class="welcome-text">
+            Hoşgeldiniz, <strong><%= user.username %></strong>
+        </span>
+        <a href="/profil" class="profile-link">Profilim</a>
+        <a href="/cikis" class="logout-btn">Çıkış Yap</a>
+    </div>
+</header>
+
+<div class="profile-container">
+
+<!-- PROFİL -->
+ <div class="profile-image-box">
+    <img 
+  src="<%= user.profile_image ? user.profile_image : '/images/default-avatar.png' %>" 
+  class="profile-avatar"
+
+  <span class="welcome-text">
+            Hoşgeldiniz, <strong><%= user.username %></strong>
+        </span>
+
+
+
+
+
+    <form action="/profil/resim-yukle" method="POST" enctype="multipart/form-data">
+        <label class="upload-btn">
+            Resim Yükle
+            <input type="file" name="profileImage" accept="image/*" onchange="this.form.submit()">
+        </label>
+    </form>
+</div>
+
+<div class="profile-card">
+<h2>👤 Profil Bilgilerim</h2>
+
+<p><strong>Kullanıcı Adı:</strong> <%= user.username %></p>
+<p><strong>Email:</strong> <%= user.email %></p>
+
+<form id="profilForm" action="/profil/guncelle" method="POST">
+
+<div class="form-group">
+    <label>Telefon</label>
+    <input
+        type="text"
+        name="phone"
+        value="<%= user.phone || '' %>"
+        maxlength="11"
+        placeholder="05XXXXXXXXX"
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+    >
+</div>
+
+<div class="form-group">
+    <label>Adres</label>
+    <textarea
+        name="address"
+        maxlength="250"
+        oninput="adresSayac.textContent=this.value.length"
+    ><%= user.address || '' %></textarea>
+    <small><span id="adresSayac"><%= user.address ? user.address.length : 0 %></span>/250</small>
+</div>
+
+<button type="submit" class="btn-primary">Bilgileri Kaydet</button>
+</form>
+
+<hr>
+
+<h3>📌 Kayıtlı Bilgiler</h3>
+<p><strong>Telefon:</strong> <%= user.phone || "Henüz girilmedi" %></p>
+<p><strong>Adres:</strong> <%= user.address || "Henüz girilmedi" %></p>
+
+</div>
+
+<!-- ŞİFRE DEĞİŞTİR -->
+<div class="profile-card">
+    <h2>🔐 Şifre Değiştir</h2>
+
+    <form action="/profil/sifre-degistir" method="POST" class="password-form">
+        <div class="form-group">
+            <label>Mevcut Şifre</label>
+            <input type="password" name="oldPassword" required>
+        </div>
+
+        <div class="form-group">
+            <label>Yeni Şifre</label>
+            <input type="password" name="newPassword" required minlength="6">
+        </div>
+
+        <div class="form-group">
+            <label>Yeni Şifre (Tekrar)</label>
+            <input type="password" name="newPassword2" required minlength="6">
+        </div>
+
+        <button class="btn-primary">
+            Şifreyi Güncelle
+        </button>
+    </form>
+</div>
+
+
+<!-- YORUMLAR -->
+<div class="comments-card">
+<h2>💬 Yorumlarım</h2>
+
+<% if (comments.length === 0) { %>
+<p>Henüz yorum yapmadınız.</p>
+<% } %>
+
+<% comments.forEach(c => { %>
+<div class="comment-box">
+    <strong>⭐ <%= c.rating %>/5</strong>
+    <p><%= c.comment_text %></p>
+    <small><%= new Date(c.created_at).toLocaleDateString() %></small>
+</div>
+<% }) %>
+</div>
+
+</div>
+</body>
+</html>

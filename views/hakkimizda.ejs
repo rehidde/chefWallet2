@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Sayfa meta ayarları -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Sayfa başlığı -->
+    <title>chefWallet | Hakkımızda</title>
+
+    <!-- GENEL CSS -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="hakkimizda.css">
+
+    <!-- Icon seti -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Özel fontlar -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ----------------------------- -->
+    <!--         ÜST MENÜ / NAVBAR     -->
+    <!-- ----------------------------- -->
+    <header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+    <a href="/">Ana Sayfa</a>
+    <a href="/tarifler">Tarifler</a>
+    <a href="/market">Market</a>
+    <a href="/hakkimizda">Hakkımızda</a>
+    <a href="/iletisim">İletişim</a>
+
+    </nav>
+    <div class="user-actions">
+  <% if (user) { %>
+    <span class="welcome-text">
+        <a href="/cikis" class="logout-btn">Çıkış Yap</a>
+      Hoşgeldiniz, <strong><%= user.username %></strong>
+    </span>
+    <a href="/sepet" class="cart-link">🛒</a>
+  <% } else { %>
+    <a href="/giris" class="login-link">👤 Giriş Yap</a>
+    <a href="/sepet" class="cart-link">🛒</a>
+  <% } %>
+</div>
+
+</header>
+
+    <!-- -------------------------------------------- -->
+    <!--         ANA İÇERİK (Hakkımızda Sayfası)       -->
+    <!-- -------------------------------------------- -->
+    <div class="main-container about-us-container">
+
+        <!-- Sayfa başlığı -->
+        <h1 class="page-title">Hakkımızda</h1>
+
+        <!-- Giriş bölümü -->
+        <section class="about-section">
+            <p>chefWallet, modern kullanıcıların yemek hazırlama ve alışveriş alışkanlıklarını tek bir noktada birleştirmeyi amaçlayan yenilikçi bir web platformudur...</p>
+            <p>chefWallet, bu soruna çözüm üreterek yemek tarifleriyle market alışverişini aynı çatı altında buluşturur...</p>
+        </section>
+
+        <!-- Platform amacı -->
+        <section class="about-section">
+            <h2 class="section-heading">Platformun Amacı</h2>
+            <p>chefWallet’ın temel amacı; tarif ile market sürecini entegre ederek kullanıcıların günlük mutfak ihtiyaçlarını modern, hızlı ve ekonomik bir şekilde karşılamasını sağlamaktır.</p>
+        </section>
+
+        <!-- Öne çıkan özellikler -->
+        <section class="about-section">
+            <h2 class="section-heading">Öne Çıkan Özellikler</h2>
+
+            <!-- Özellik listesi -->
+            <ul class="features-list">
+                <li>Yüzlerce yemek tarifi kategorisi</li>
+                <li>Tarif içi malzemeleri tek tıkla sepete ekleme</li>
+                <li>Geniş market ürün yelpazesi</li>
+                <li>5 yıldız değerlendirme ve yorum sistemi</li>
+                <li>Kullanıcı hesabı ve dijital cüzdan sistemi</li>
+                <li>Mobil uyumlu tasarım</li>
+            </ul>
+        </section>
+
+        <!-- Vizyon -->
+        <section class="about-section">
+            <h2 class="section-heading">Vizyonumuz</h2>
+            <p>Dijital mutfak dünyasında Türkiye’nin en güvenilen ve en entegre platformu olmak...</p>
+        </section>
+
+        <!-- Misyon -->
+        <section class="about-section">
+            <h2 class="section-heading">Misyonumuz</h2>
+            <p>Tarif ve alışveriş deneyimini tek bir dijital ortamda buluşturarak pratik ve kullanıcı odaklı bir hizmet sunmak.</p>
+        </section>
+
+        <!-- Proje ekibi -->
+        <section class="about-section">
+            <h2 class="section-heading">Proje Ekibi</h2>
+
+            <ul class="team-list">
+                <li>242511004 - Utku Ata Çetin</li>
+                <li>242511038 - Ceyda Rahime Kılıç</li>
+                <li>242511046 - Cemre Celep</li>
+                <li>242511166 - Yousef Ahmet Abdullah Yaseen</li>
+                <li>242511152 - Danial Ghanean</li>
+            </ul>
+        </section>
+
+        <!-- Tarih -->
+        <section class="about-section">
+            <h2 class="section-heading">Oluşturulma Tarihi</h2>
+            <p>ChefWallet projesi 2025 yılında geliştirilmiştir.</p>
+        </section>
+    </div>
+
+    <!-- -------------------------------------------- -->
+    <!--                     FOOTER                   -->
+    <!-- -------------------------------------------- -->
+    <footer class="full-footer">
+        <div class="footer-content">
+
+            <!-- Sol taraf - logo -->
+            <div class="footer-section">
+                <div class="footer-logo">chefWallet</div>
+                <p>Tarif ve market alışverişini tek platformda buluşturan dijital mutfak yardımcınız.</p>
+                <p style="margin-top: 10px;">&copy; 2025 chefWallet</p>
+            </div>
+
+            <!-- Hızlı erişim -->
+            <div class="footer-section">
+                <h4>Hızlı Erişim</h4>
+                <ul>
+                    <li><a href="index.html">Ana Sayfa</a></li>
+                    <li><a href="tarifler.html">Tüm Tarifler</a></li>
+                    <li><a href="market.html">Market Sayfası</a></li>
+                    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                </ul>
+            </div>
+
+            <!-- Yardım -->
+            <div class="footer-section">
+                <h4>Yardım</h4>
+                <ul>
+                    <li><a href="/iletisim">İletişim</a></li>
+                    <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                    <li><a href="#">Kullanım Şartları</a></li>
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                </ul>
+            </div>
+
+            <!-- Sosyal medya / iletişim -->
+            <div class="footer-section">
+                <h4>Bize Ulaşın</h4>
+                <p>E-posta: info@chefwallet.com</p>
+                <p>Tel: +90 555 123 45 67</p>
+
+                <!-- Sosyal medya ikonları -->
+                <div class="footer-social-links" style="margin-top: 15px;">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            chefWallet Projesi | Tüm Hakları Saklıdır.
+        </div>
+    </footer>
+
+</body>
+</html>

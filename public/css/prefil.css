@@ -1,0 +1,228 @@
+/* =========================
+   CHEF WALLET - PREMIUM PROFILE (ANIMATED)
+   النسخة الكاملة مع الخلفية المتحركة
+========================= */
+
+:root {
+    --rosewood: #70020F;
+    --rosewood-gradient: linear-gradient(135deg, #70020F 0%, #4a010a 100%);
+    --misty-rose: #F7E6E9;
+    --glass: rgba(255, 255, 255, 0.85);
+    --shadow-rich: 0 20px 40px rgba(112, 2, 15, 0.1);
+    --white: #ffffff;
+}
+
+/* الخلفية المتحركة */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    /* التدرج اللوني الذي يتحرك */
+    background: linear-gradient(-45deg, #fdfafb, #F7E6E9, #70020F, #4a010a);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* إضافة طبقة النقاط (Texture) فوق الحركة */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: radial-gradient(var(--rosewood) 0.5px, transparent 0.5px);
+    background-size: 30px 30px;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+/* أنيميشن تحريك الخلفية */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* الحاوية الرئيسية */
+.profile-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 25px;
+    padding: 20px;
+}
+
+/* صندوق الصورة الشخصية */
+.profile-image-box {
+    grid-column: 1 / -1;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--shadow-rich);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-image-box::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    background: var(--misty-rose);
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.5;
+}
+
+.profile-avatar {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-avatar:hover {
+    transform: rotate(5deg) scale(1.05);
+}
+
+/* الكروت (مع تأثير الشفافية ليظهر خلفها الأنيميشن) */
+.profile-card, .comments-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: var(--shadow-rich);
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.profile-card h2, .comments-card h2 {
+    color: var(--rosewood);
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+}
+
+/* الفورم والتنسيقات */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    background: rgba(249, 249, 249, 0.8);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    padding: 14px 18px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-sizing: border-box;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    background: #fff;
+    border-color: var(--rosewood);
+    box-shadow: 0 10px 20px rgba(112, 2, 15, 0.05);
+    outline: none;
+}
+
+.btn-primary {
+    background: var(--rosewood-gradient);
+    color: white;
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 20px rgba(112, 2, 15, 0.3);
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(112, 2, 15, 0.4);
+    filter: brightness(1.2);
+}
+
+.upload-btn {
+    margin-top: 15px;
+    padding: 10px 25px;
+    background: #fff;
+    border: 2px solid var(--rosewood);
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background: var(--rosewood);
+    color: #fff;
+}
+
+.comments-card {
+    grid-column: 1 / -1;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(247, 230, 233, 0.8));
+}
+
+.comment-box {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.comment-box:hover {
+    transform: scale(1.01);
+    background: #fff;
+}
+
+.profile-card p {
+    background: rgba(247, 230, 233, 0.6);
+    padding: 12px 18px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    color: var(--rosewood);
+    font-weight: 500;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--misty-rose);
+    margin: 25px 0;
+}
+
+/* استجابة الموبايل */
+@media (max-width: 900px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
+}

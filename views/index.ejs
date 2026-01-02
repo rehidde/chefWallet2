@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chefWallet | Tarifler ve Market</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <% if (!user) { %>
+<div id="loginOverlay">
+  <div class="login-box">
+    <h3>ChefWallet</h3>
+    <p>
+      chefWallet sitemize hoşgeldiniz!<br><br>
+      Lütfen sitemizdeki diğer sayfalara ulaşabilmek için giriş yapınız.
+      Eğer kayıtlı değilseniz öncelikle kayıt olunuz.
+    </p>
+    <a href="/giris" class="login-btn">Giriş Yap</a>
+  </div>
+</div>
+<% } %>
+
+
+    <header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+    <a href="/">Ana Sayfa</a>
+    <a href="/tarifler">Tarifler</a>
+    <a href="/market">Market</a>
+    <a href="/hakkimizda">Hakkımızda</a>
+    <a href="/iletisim">İletişim</a>
+
+    </nav>
+    <div class="user-actions">
+    <% if (user) { %>
+        <span class="welcome-text">
+            Hoşgeldiniz, <strong><%= user.username %></strong>
+        </span>
+        
+        <a href="/profil" class="profile-link">Profilim</a>
+        
+        <a href="/sepet" class="cart-link" title="Sepetim">🛒</a>
+        
+        <a href="/cikis" class="logout-btn">Çıkış Yap</a>
+    <% } else { %>
+        <a href="/giris" class="login-link">👤 Giriş Yap</a>
+        <a href="/sepet" class="cart-link">🛒</a>
+    <% } %>
+</div>
+
+</header>
+
+    <!--<section class="hero-image-container">
+        <div class="hero-image">
+            <img src="images/foodPlate.jpg" alt="Üzerine çikolata sosu dökülen mükemmel dizilmiş pancake yığını">
+        </div>
+    </section> -->
+
+    <section class="product-detail-section">
+        <div class="product-info">
+            <h1 class="product-name">ORGANİK PANCAKE & WAFFLE KARIŞIMI</h1>
+            <div class="rating">★★★★★</div>
+            <p class="product-description">
+                100% Organik sertifikalı, glütensiz ve yüksek proteinli pancake ve waffle karışımımızla en lezzetli kahvaltıyı sadece dakikalar içinde hazırlayın. Tamamen doğal içeriklerden üretilmiştir.
+            </p>
+            <div class="product-price">24.99 TL</div>
+            <button class="add-to-cart-btn">SEPETE EKLE</button>
+        </div>
+        <div class="product-image-can">
+            <img src="images/blueberryPancake.jpg" alt="chefWallet ürün kutusu">
+        </div>
+    </section>
+
+    <section class="motto-section">
+        <p>BAZI ŞEYLER VE BUNLAR HAKKINDAKİ DÜŞÜNCELER SONSUZA KADAR SÜRER, AMA **KAHVALTI** BUNLARDAN BİRİ OLMAMALI</p>
+    </section>
+
+    <section class="quick-links-section">
+        
+        <div class="quick-link-box">
+        <h2 class="box-title">TARİFLER</h2>
+        <p>Sağlıklı, lezzetli ve pratik tariflerimizle mutfakta zaman kaybetmeyin.</p>
+        <a href="/tarifler" class="link-button">TÜM TARİFLER</a>
+    </div>
+
+        <div class="quick-link-box">
+            <div class="box-content">
+                <h2 class="box-title">MARKET</h2>
+                <p>İhtiyacın olan tüm malzemeleri tek tıkla al.</p>
+                <button class="link-button" onclick="location.href='/market'">MARKETİ ZİYARET ET</button>
+            </div>
+        </div>
+
+    </section>
+    <!--burdan yorum kismi baslar -->
+<section class="comments-section">
+    <div class="comments-container">
+        <h2 class="comments-title">Müşteri Yorumları</h2>
+        <p class="comments-subtitle">Deneyimlerinizi bizimle paylaşın</p>
+        
+        <!-- yorum eklemek isterse -->
+        <div class="add-comment-form">
+            <h3>Yorum yapmak için öncelikle kayıt olmalısınız!</h3>
+            <form id="commentForm">
+                <div class="form-group">
+                    <textarea id="commentText" placeholder="Yorumunuz..." rows="4" required></textarea>
+                </div>
+                
+                <!-- yildiz sistemi html -->
+                <div class="rating-section">
+                    <label>Değerlendirme:</label>
+                    <div class="star-rating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <span class="rating-text">0/5</span>
+                </div>
+                
+                <button type="submit" class="submit-comment-btn">Yorumu Gönder</button>
+            </form>
+        </div>
+       
+        <div class="comments-list" id="commentsList">
+            <!-- yapilan yorum buraya cikacak -->
+        </div>
+    </div>
+</section>
+
+    <footer class="full-footer">
+    <div class="footer-content">
+        
+        <div class="footer-section">
+            <div class="footer-logo">chefWallet</div>
+            <p>Tarif ve market alışverişini tek platformda buluşturan dijital mutfak yardımcınız.</p>
+            <p style="margin-top: 10px;">&copy; 2025 chefWallet</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Hızlı Erişim</h4>
+            <ul>
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/tarifler">Tüm Tarifler</a></li>
+                <li><a href="/market">Market Sayfası</a></li>
+                <li><a href="/hakkimizda">Hakkımızda</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Yardım</h4>
+            <ul>
+                <li><a href="/iletisim">İletişim</a></li>
+                <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                <li><a href="#">Kullanım Şartları</a></li>
+                <li><a href="#">Gizlilik Politikası</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Bize Ulaşın</h4>
+            <p>E-posta: info@chefwallet.com</p>
+            <p>Tel: +90 555 123 45 67</p>
+            <div class="footer-social-links" style="margin-top: 15px;">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="footer-bottom">
+        chefWallet Projesi | Tüm Hakları Saklıdır.
+    </div>
+</footer>
+<script src="js/index.js"></script>
+</body>
+
+</html>

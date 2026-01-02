@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chefWallet | Yeni Kayıt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Orijinalden Korunan ve Ayrı Sayfa İçin Düzenlenen Stiller */
+        
+        /* Body'yi dikeyde esnek yapıp içeriği ortalamak için */
+        
+/* --- تنسيق حاوية أفعال المستخدم --- */
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* مسافة متساوية بين كل العناصر */
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 50px;
+    backdrop-filter: blur(5px);
+}
+
+/* تحسين نص الترحيب */
+.welcome-text {
+    font-size: 0.9rem;
+    color: #4a010a;
+    margin-right: 5px;
+}
+
+/* --- تصميم زر السلة (Cart) الجديد --- */
+.cart-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    background: #ffffff;
+    border: 2px solid var(--rosewood);
+    border-radius: 50%; /* شكل دائري */
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.cart-link:hover {
+    background: var(--rosewood);
+    transform: scale(1.1) rotate(-10deg);
+    box-shadow: 0 6px 12px rgba(112, 2, 15, 0.2);
+}
+
+.cart-link:hover::after {
+    color: white; /* يضمن بقاء الرمز واضحاً */
+}
+
+/* تعديل بسيط لزر تسجيل الدخول (في حال عدم وجود مستخدم) */
+.login-link {
+    padding: 10px 20px;
+    border-radius: 50px;
+    background: #fff;
+    color: var(--rosewood);
+    border: 1.5px solid var(--rosewood);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.login-link:hover {
+    background: var(--rosewood);
+    color: #fff !important;
+}
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: var(--misty-rose); 
+            color: var(--rosewood);
+        }
+        
+        /* Ana içeriği esnek bırakıp aradaki boşluğu doldurmak için */
+        .main-content {
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Formu dikeyde ortalar */
+            align-items: center;
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        /* Senin form stillerin (Rosewood ve Misty Rose değişkenleriyle güncellenmiş ve korunan stiller) */
+        /* Sadece tek bir form olduğu için container stilini de tek form için uyarlıyoruz */
+        .container {
+            display: flex;
+            justify-content: center; /* Merkezi görünüm için */
+            padding: 0 20px;
+            margin: auto;
+        }
+
+        .form-box {
+            width: 320px;
+            padding: 30px;
+            background-color: var(--white);
+            border: 2px solid var(--rosewood);
+            border-radius: 5px;
+            box-shadow: 10px 10px 0px rgba(112, 2, 15, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .form-box:hover { transform: translateY(-5px); }
+        .form-box h2 { font-family: 'Playfair Display', serif; text-align: center; color: var(--rosewood); margin-bottom: 25px; border-bottom: 1px solid #c0c0c0; padding-bottom: 10px; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 3px; font-weight: 700; font-size: 0.95em; color: #4a4a4a; }
+        .char-limit { display: block; font-size: 0.75em; margin-top: 0px; margin-bottom: 15px; color: #4a4a4a; opacity: 0.5; font-family: Arial, sans-serif; }
+        .input-group input { width: 100%; padding: 12px 10px; border: 1px solid #a0a0a0; border-radius: 3px; box-sizing: border-box; background-color: #fff; font-family: 'Roboto', sans-serif; }
+        .btn { width: 100%; padding: 12px; background-color: var(--rosewood); color: var(--white); border: none; border-radius: 3px; cursor: pointer; font-size: 1em; font-weight: 700; margin-top: 15px; letter-spacing: 1px; box-shadow: 3px 3px 0px #3e0007; transition: background-color 0.2s, transform 0.1s; }
+        .btn:hover { background-color: #4a0008; transform: translateY(1px); }
+        .social-links { width: 90%; max-width: 700px; text-align: center; margin-top: 40px; padding: 0 20px; }
+        .social-links h3 { font-family: 'Playfair Display', serif; font-size: 1.5em; color: var(--rosewood); margin-bottom: 20px; border-bottom: 1px solid rgba(112, 2, 15, 0.5); padding-bottom: 10px; }
+        .social-button { display: inline-block; width: 35px; height: 35px; line-height: 35px; text-align: center; background-color: #4A0007; color: white; border-radius: 3px; margin-right: 8px; font-size: 1.1em; box-shadow: 2px 2px 0px #330005; transition: background-color 0.2s, transform 0.1s; }
+        .social-button:hover { background-color: var(--rosewood); transform: translateY(-1px); }
+        .form-link-text { text-align: center; margin-top: 20px; font-size: 0.9em; }
+        .form-link-text a { color: var(--rosewood); text-decoration: none; font-weight: 700; }
+        .form-link-text a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; gap: 30px; padding-left: 0; width: 90%; max-width: 400px; margin: 0 auto; }
+            .form-box { width: 100%; box-shadow: 5px 5px 0px rgba(112, 2, 15, 0.3); }
+            .social-links { margin: 40px auto; text-align: center; }
+        }
+    </style>
+</head>
+
+<body> 
+    <header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+    <a href="/">Ana Sayfa</a>
+    <a href="/tarifler">Tarifler</a>
+    <a href="/market">Market</a>
+    <a href="/hakkimizda">Hakkımızda</a>
+    <a href="/iletisim">İletişim</a>
+
+    </nav>
+    <div class="user-actions">
+        <a href="/giris" class="login-link" style="margin-right: 10px;">👤 Giriş Yap</a> 
+        <a href="/sepet" class="cart-link">🛒</a>
+    </div>
+</header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="form-box" id="signup-form">
+                <h2>Yeni Kayıt</h2>
+                <form action="#" method="POST">
+                    <div class="input-group"><label for="signup-username">Ad</label><small class="char-limit">Maksimum 40 Karakter</small><input type="text" id="signup-username" name="name" maxlength="40" required></div>
+                    <div class="input-group"><label for="signup-email">E-posta</label><input type="email" id="signup-email" name="email" required></div>
+                    <div class="input-group"><label for="signup-password">Yeni Şifre</label><small class="char-limit">Minimum 6 / Maksimum 20 Karakter</small><input type="password" id="signup-password" name="password" minlength="6" maxlength="20" required></div>
+                    <div class="input-group"><label for="signup-confirm-password">Şifre Onayı</label><small class="char-limit">Minimum 6 / Maksimum 20 Karakter</small><input type="password" id="signup-confirm-password" name="confirm-password" minlength="6" maxlength="20" required></div>
+                    <button type="submit" class="btn">Kayıt İşlemini Tamamla</button>
+                </form>
+                <p class="form-link-text">Zaten hesabın var mı? <a href="/giris">Giriş Yap</a></p>
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <h3>Bizi Takip Edin</h3>
+            <a href="#" target="_blank" class="social-button"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" class="social-button"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank" class="social-button"><i class="fab fa-twitter"></i></a>
+        </div>
+    </main>
+    
+    <footer class="full-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <div class="footer-logo">chefWallet</div>
+            <p>Tarif ve market alışverişini tek platformda buluşturan dijital mutfak yardımcınız.</p>
+            <p style="margin-top: 10px;">&copy; 2025 chefWallet</p>
+        </div>
+        <div class="footer-section">
+            <h4>Hızlı Erişim</h4>
+            <ul>
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="tarifler.html">Tüm Tarifler</a></li>
+                <li><a href="market.html">Market Sayfası</a></li>
+                <li><a href="hakkimizda.html">Hakkımızda</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Yardım</h4>
+            <ul>
+                <li><a href="iletisim.html">İletişim</a></li>
+                <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                <li><a href="#">Kullanım Şartları</a></li>
+                <li><a href="#">Gizlilik Politikası</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Bize Ulaşın</h4>
+            <p>E-posta: info@chefwallet.com</p>
+            <p>Tel: +90 555 123 45 67</p>
+            <div class="footer-social-links" style="margin-top: 15px;">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        chefWallet Projesi | Tüm Hakları Saklıdır.
+    </div>
+    </footer>
+<script>
+// Orijinaldeki sadece Kayıt İşlemi Script'i
+document.querySelector("#signup-form form").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("signup-username").value.trim();
+    const email = document.getElementById("signup-email").value.trim();
+    const password = document.getElementById("signup-password").value;
+    const confirm = document.getElementById("signup-confirm-password").value;
+
+    if(password !== confirm){
+        alert("Şifreler eşleşmiyor.");
+        return;
+    }
+
+    try {
+        const res = await fetch("http://localhost:27655/register", {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({ username: name, email: email, password: password })
+        });
+        const data = await res.json();
+        if(data.success){
+            // server'dan dönen kullanıcıyı al (server.js'de register sonrası user döndürülmüşse)
+            const user = data.user || { id: null, username: name };
+            localStorage.setItem("user", JSON.stringify({ id: user.id, username: user.username }));
+            // yönlendir
+            window.location.href = "/";
+        } else {
+            alert(data.message || "Kayıt başarısız.");
+        }
+    } catch(err){
+        console.error(err);
+        alert("Sunucuya bağlanılamıyor. Server çalışıyor mu?");
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>chefWallet | İletişim</title>
+
+   
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/iletisim.css">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google yazı tipleri -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    
+   <header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+    <a href="/">Ana Sayfa</a>
+    <a href="/tarifler">Tarifler</a>
+    <a href="/market">Market</a>
+    <a href="/hakkimizda">Hakkımızda</a>
+    <a href="/iletisim">İletişim</a>
+
+    </nav>
+    <div class="user-actions">
+  <% if (user) { %>
+    <span class="welcome-text">
+        <a href="/cikis" class="logout-btn">Çıkış Yap</a>
+      Hoşgeldiniz, <strong><%= user.username %></strong>
+    </span>
+    <a href="/sepet" class="cart-link">🛒</a>
+  <% } else { %>
+    <a href="/giris" class="login-link">👤 Giriş Yap</a>
+    <a href="/sepet" class="cart-link">🛒</a>
+  <% } %>
+</div>
+
+</header>
+
+    <!-- ========== ANA İLETİŞİM SAYFASI ========== -->
+    <div class="main-container contact-container">
+
+        <!-- Sayfa başlığı -->
+        <h1 class="page-title">Bizimle İletişime Geçin</h1>
+        <p class="subtitle">Her türlü soru, öneri ve işbirliği talepleriniz için bize yazabilirsiniz.</p>
+
+        <div class="contact-grid">
+            
+            <!-- ========== SOL TARAF: MESAJ GÖNDERME FORMU ========== -->
+            <div class="contact-form-section">
+                <h2 class="section-heading">Mesaj Gönderin</h2>
+
+                <!-- Form (backend olmadığı için şimdilik sadece görünüm) -->
+                <form action="#" method="POST" class="contact-form">
+
+                    <div class="form-group">
+                        <label for="name">Adınız Soyadınız</label>
+                        <input type="text" id="name" name="name" required placeholder="Adınız">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-posta Adresiniz</label>
+                        <input type="email" id="email" name="email" required placeholder="ornek@mail.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Konu</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Öneri, Şikayet, İşbirliği vb.">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mesajınız</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Mesajınızı buraya yazınız..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Gönder</button>
+                </form>
+            </div>
+
+            <!-- ========== SAĞ TARAF: İLETİŞİM BİLGİLERİ ========== -->
+            <div class="contact-info-section">
+                <h2 class="section-heading">İletişim Bilgileri</h2>
+
+                <!-- Adres -->
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt icon"></i>
+                    <p>chefWallet Genel Merkezi</p>
+                    <p>Çankaya/Ankara, Türkiye</p>
+                </div>
+
+                <!-- E-posta -->
+                <div class="info-item">
+                    <i class="fas fa-envelope icon"></i>
+                    <p>E-posta Destek</p>
+                    <p><a href="mailto:info@chefwallet.com">info@chefwallet.com</a></p>
+                </div>
+
+                <!-- Telefon -->
+                <div class="info-item">
+                    <i class="fas fa-phone-alt icon"></i>
+                    <p>Telefon Hattı</p>
+                    <p><a href="tel:+905551234567">+90 (555) 123 45 67</a></p>
+                </div>
+
+                <!-- Sosyal medya -->
+                <h2 class="section-heading social-heading">Bizi Takip Edin</h2>
+                <div class="social-links">
+                    <a href="#" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                </div>
+
+                <!-- Harita (şimdilik placeholder) -->
+                <div class="map-placeholder">
+                    <p>Harita Yer Tutucusu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER / ALT BÖLÜM ========== -->
+    <footer class="full-footer">
+        <div class="footer-content">
+
+            <!-- Logo ve açıklama -->
+            <div class="footer-section">
+                <div class="footer-logo">chefWallet</div>
+                <p>Tarif ve market alışverişini tek platformda buluşturan dijital mutfak yardımcınız.</p>
+                <p style="margin-top: 10px;">&copy; 2025 chefWallet</p>
+            </div>
+
+           <div class="footer-section">
+    <h4>Hızlı Erişim</h4>
+    <ul>
+        <li><a href="/">Ana Sayfa</a></li>
+        <li><a href="/tarifler">Tüm Tarifler</a></li>
+        <li><a href="/market">Market Sayfası</a></li>
+        <li><a href="/hakkimizda">Hakkımızda</a></li>
+        
+
+    </ul>
+</div>
+
+            <!-- Yardım -->
+            <div class="footer-section">
+                <h4>Yardım</h4>
+                <ul>
+                    <li><a href="iletisim">İletişim</a></li>
+                    <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                    <li><a href="#">Kullanım Şartları</a></li>
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                </ul>
+            </div>
+
+            <!-- İletişim bilgileri -->
+            <div class="footer-section">
+                <h4>Bize Ulaşın</h4>
+                <p>E-posta: info@chefwallet.com</p>
+                <p>Tel: +90 555 123 45 67</p>
+
+                <!-- Sosyal medya -->
+                <div class="footer-social-links" style="margin-top: 15px;">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            chefWallet Projesi | Tüm Hakları Saklıdır.
+        </div>
+    </footer>
+
+</body>
+</html>

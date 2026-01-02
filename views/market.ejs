@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>chefWallet — Market</title>
+
+  <!-- Bootstrap + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <!-- CUSTOM CSS DOSYAN -->
+  <link rel="stylesheet" href="/css/market.css">
+  
+
+</head>
+<body>
+
+ <header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+    <a href="/">Ana Sayfa</a>
+    <a href="/tarifler">Tarifler</a>
+    <a href="/market">Market</a>
+    <a href="/hakkimizda">Hakkımızda</a>
+    <a href="/iletisim">İletişim</a>
+
+    </nav>
+    <div class="user-actions">
+  <% if (user) { %>
+    <span class="welcome-text">
+        <a href="/cikis" class="logout-btn">Çıkış Yap</a>
+      Hoşgeldiniz, <strong><%= user.username %></strong>
+    </span>
+    <a href="/sepet" class="cart-link">🛒</a>
+  <% } else { %>
+    <a href="/giris" class="login-link">👤 Giriş Yap</a>
+    <a href="javascript:void(0)" onclick="miniSepetGoster()" class="cart-link">🛒</a>
+  <% } %>
+</div>
+
+</header>
+
+ <!-- Mini Sepet -->
+<div id="miniCart" class="mini-cart" style="display:none;">
+    <h3>Sepetim</h3>
+    <div id="miniCartItems"></div>
+    <div class="mini-cart-total">Toplam: <span id="miniCartTotal">0</span> ₺</div>
+    <button class="go-cart-btn" onclick="window.location.href='/sepet'">
+        Sepete Git
+    </button>
+</div>
+<main class="container-max">
+  <h2>Market Kategorileri</h2>
+  <p>Alışveriş yapmak istediğiniz kategoriyi seçin.</p>
+
+  <section class="categories-grid" id="categories"></section>
+
+  <section id="productsArea" class="hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:26px;">
+      <h3 id="productsTitle"></h3>
+      <button class="link-button" onclick="kategorilereDon()">Kategorilere Dön</button>
+    </div>
+
+    <div class="products-grid-2" id="productsGrid"></div>
+  </section>
+</main>
+
+
+<footer class="full-footer">
+    <div class="footer-content">
+        
+        <div class="footer-section">
+            <div class="footer-logo">chefWallet</div>
+            <p>Tarif ve market alışverişini tek platformda buluşturan dijital mutfak yardımcınız.</p>
+            <p style="margin-top: 10px;">&copy; 2025 chefWallet</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Hızlı Erişim</h4>
+            <ul>
+                <li><a href="/">Ana Sayfa</a></li>
+                <li><a href="/tarifler">Tüm Tarifler</a></li>
+                <li><a href="/market">Market Sayfası</a></li>
+                <li><a href="/hakkimizda">Hakkımızda</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Yardım</h4>
+            <ul>
+                <li><a href="/iletisim">İletişim</a></li>
+                <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                <li><a href="#">Kullanım Şartları</a></li>
+                <li><a href="#">Gizlilik Politikası</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Bize Ulaşın</h4>
+            <p>E-posta: info@chefwallet.com</p>
+            <p>Tel: +90 555 123 45 67</p>
+        </div>
+        
+    </div>
+    <div class="footer-bottom">
+        chefWallet Projesi | Tüm Hakları Saklıdır.
+    </div>
+</footer>
+
+
+
+<!-- JS dosyan -->
+<script src="/js/market.js"></script>
+
+
+
+
+
+</body>
+</html>

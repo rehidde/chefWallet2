@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Güvenli Ödeme Sayfası</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+     /* ================================================== */
+/* ✅ ÖDEME SİSTEMİ CSS GÜNCELLEME - TEMAYA UYUMLU ✅ */
+/* ================================================== */
+
+/* Renk ve Temel Değişkenler */
+:root {
+    --primary-color: #70020F; /* Rosewood */
+    --secondary-color: #FFDEE2; /* Misty Rose */
+    --button-hover: #920315;
+    --input-border: #D4AF37; /* Gold accent ile uyumlu */
+    --success-color: #28a745;
+    --white: #FFFFFF;
+}
+
+/* Genel Body ve Font Ayarları */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--secondary-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--primary-color);
+}
+
+/* Navigasyon Çubuğu */
+.navbar {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.navbar nav a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar nav a:hover {
+    color: var(--secondary-color);
+}
+
+/* Kullanıcı İşlemleri */
+.user-actions a {
+    color: var(--white);
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 1.2em;
+}
+
+/* Ödeme Konteyneri */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.payment-container {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Ödeme Seçenekleri */
+.payment-options {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.payment-option {
+    flex-grow: 1;
+    text-align: center;
+    padding: 15px;
+    margin: 0 5px;
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.payment-option:hover {
+    border-color: var(--primary-color);
+    background-color: #FFF0F2;
+}
+
+.payment-option.active {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.payment-option i {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Form Alanları */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+.expiry-date-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+    font-size: 16px;
+}
+
+input:focus, .expiry-date-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(112,2,15,0.2);
+}
+
+.expiry-date-group {
+    display: flex;
+    gap: 10px;
+}
+
+.expiry-date-group div {
+    flex-grow: 1;
+}
+
+/* Ödeme Butonu */
+.pay-button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pay-button:hover {
+    background-color: var(--button-hover);
+}
+
+/* PayPal Özel Renkleri */
+#paypal-info .pay-button {
+    background-color: #6b062d;
+}
+
+#paypal-info .pay-button:hover {
+    background-color: #920315;
+}
+
+/* Güvenlik Notu */
+.security-note {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+.security-note i {
+    margin-right: 5px;
+}
+
+/* Formlar başlangıç durumu */
+#card-form-container { display: block; }
+#paypal-info { display: none; }
+
+/* Mobil Uyumlu Ödeme Sistemi */
+@media (max-width: 900px) {
+    .payment-options { flex-direction: column; gap: 10px; }
+    .payment-option { margin: 0; }
+    .main-content { padding: 10px; }
+}
+
+    </style>
+</head>
+<body>
+    
+    <header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+    <a href="/">Ana Sayfa</a>
+    <a href="/tarifler">Tarifler</a>
+    <a href="/market">Market</a>
+    <a href="/hakkimizda">Hakkımızda</a>
+    <a href="/iletisim">İletişim</a>
+
+    </nav>
+    <div class="user-actions">
+        <a href="/giris" class="login-link" style="margin-right: 10px;">👤 Giriş Yap</a> 
+        <a href="/sepet" class="cart-link">🛒</a>
+    </div>
+</header>
+    <div class="main-content">
+        <div class="payment-container">
+            <h2>Ödeme İşlemini Tamamla</h2>
+            
+            <div class="payment-options">
+                <div class="payment-option active" id="visa-option" onclick="selectPayment('visa')">
+                    <i class="fab fa-cc-visa"></i> Kredi / Banka Kartı
+                </div>
+                <div class="payment-option" id="paypal-option" onclick="selectPayment('paypal')">
+                    <i class="fab fa-paypal"></i> PayPal
+                </div>
+            </div>
+
+            <form id="card-form-container">
+                <div class="form-group">
+                    <label for="card-number">Kart Numarası</label>
+                    <input type="text" id="card-number" placeholder="xxxx xxxx xxxx xxxx" required maxlength="19">
+                    <p class="error-message" id="card-number-error"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="card-name">Kart Üzerindeki İsim</label>
+                    <input type="text" id="card-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Son Kullanma Tarihi</label>
+                    <div class="expiry-date-group">
+                        <div>
+                            <select id="exp-month" required>
+                                <option value="">Ay</option>
+                                <script>
+                                    for (let i = 1; i <= 12; i++) {
+                                        document.write(`<option value="${i}">${i < 10 ? '0' + i : i}</option>`);
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                        <div>
+                            <select id="exp-year" required>
+                                <option value="">Yıl</option>
+                                <script>
+                                    const currentYear = new Date().getFullYear();
+                                    for (let i = 0; i < 10; i++) {
+                                        document.write(`<option value="${currentYear + i}">${currentYear + i}</option>`);
+                                    }
+                                </script>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cvv">Güvenlik Kodu (CVV)</label>
+                    <input type="text" id="cvv" placeholder="Örn: 123" required maxlength="4" style="max-width: 100px;">
+                    <p class="error-message" id="cvv-error"></p>
+                </div>
+
+                <button type="submit" class="pay-button">Şimdi Öde 550.00 TRY</button>
+            </form>
+
+            <div id="paypal-info">
+                <p>Ödeme işlemini tamamlamak için güvenli PayPal sayfasına yönlendirileceksiniz.</p>
+                <button class="pay-button">
+                    <i class="fab fa-paypal" style="margin-right: 10px;"></i> PayPal ile Öde
+                </button>
+            </div>
+            
+            <div class="security-note">
+                <i class="fas fa-lock"></i> Ödeme işleminiz tamamen güvenli ve şifrelenmiştir.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Ödeme Yöntemi Seçimi Fonksiyonu
+        function selectPayment(method) {
+            const visaOption = document.getElementById('visa-option');
+            const paypalOption = document.getElementById('paypal-option');
+            const cardForm = document.getElementById('card-form-container');
+            const paypalInfo = document.getElementById('paypal-info');
+
+            if (method === 'visa') {
+                visaOption.classList.add('active');
+                paypalOption.classList.remove('active');
+                cardForm.style.display = 'block';
+                paypalInfo.style.display = 'none';
+            } else if (method === 'paypal') {
+                visaOption.classList.remove('active');
+                paypalOption.classList.add('active');
+                cardForm.style.display = 'none';
+                paypalInfo.style.display = 'block';
+            }
+        }
+        
+        // 2. Kart Numarası Formatlama ve Kontrol Fonksiyonu
+        document.getElementById('card-form-container').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            const cardNumberInput = document.getElementById('card-number');
+            const cvvInput = document.getElementById('cvv');
+            
+            let isValid = true;
+
+            // Kontrol 1: Kart Numarası
+            const cardNumber = cardNumberInput.value.replace(/\s/g, ''); 
+            if (cardNumber.length < 13 || cardNumber.length > 19 || !/^\d+$/.test(cardNumber)) {
+                alert('Hata: Geçerli bir Kart Numarası giriniz (13-19 hane).');
+                cardNumberInput.focus();
+                isValid = false;
+            }
+
+            // Kontrol 2: CVV
+            const cvv = cvvInput.value;
+            if (isValid && (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv))) {
+                alert('Hata: Geçerli bir CVV kodu giriniz (3 veya 4 hane).');
+                cvvInput.focus();
+                isValid = false;
+            }
+
+            // Eğer tüm kontroller başarılıysa, veriyi arka uca (Backend) gönder
+            if (!isValid) {
+                 errorMessage.textContent = 'Kart bilgileri geçersiz. Lütfen kontrol edin.';
+                    return;
+                }      
+
+            if (isValid) {
+                  alert("Ödeme başarılı!");
+                 window.location.href = "index.html";  // Ana sayfaya yönlendir
+                }
+        });
+        
+        // İsteğe bağlı: Kart numarasını gruplara ayırma (4 hanede bir boşluk)
+        document.getElementById('card-number').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s/g, ''); 
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+        });
+
+    
+    // 1. Ödeme Yöntemi Seçimi Fonksiyonu (Aynı Kalır)
+    function selectPayment(method) {
+        const visaOption = document.getElementById('visa-option');
+        const paypalOption = document.getElementById('paypal-option');
+        const cardForm = document.getElementById('card-form-container');
+        const paypalInfo = document.getElementById('paypal-info');
+
+        if (method === 'visa') {
+            visaOption.classList.add('active');
+            paypalOption.classList.remove('active');
+            cardForm.style.display = 'block';
+            paypalInfo.style.display = 'none';
+        } else if (method === 'paypal') {
+            visaOption.classList.remove('active');
+            paypalOption.classList.add('active');
+            cardForm.style.display = 'none';
+            paypalInfo.style.display = 'block';
+        }
+    }
+
+    // Yardımcı Fonksiyon: Hata mesajını gösterir
+    function displayError(inputElement, message) {
+        // Hata mesajı için dinamik bir p etiketi oluşturur veya günceller
+        let errorElement = document.getElementById(inputElement.id + '-error');
+        if (!errorElement) {
+            errorElement = document.createElement('p');
+            errorElement.className = 'error-message';
+            errorElement.id = inputElement.id + '-error';
+            inputElement.parentNode.appendChild(errorElement);
+        }
+        errorElement.textContent = message;
+        errorElement.style.color = '#ff0000'; // Kırmızı hata rengi
+        inputElement.style.borderColor = '#ff0000';
+    }
+
+    // Yardımcı Fonksiyon: Hata mesajını temizler
+    function clearError(inputElement) {
+        const errorElement = document.getElementById(inputElement.id + '-error');
+        if (errorElement) {
+            errorElement.textContent = '';
+            inputElement.style.borderColor = ''; // Varsayılana döner
+        }
+    }
+
+    // --- 2. Input Alanlarına Anlık Kısıtlamalar ve Formatlama ---
+    
+    // Kart Numarası (Sadece Rakam ve 4 Hanede Bir Boşluk)
+    document.getElementById('card-number').addEventListener('input', function (e) {
+        let input = e.target;
+        // Sadece rakamları tut
+        let value = input.value.replace(/[^0-9]/g, ''); 
+        
+        let formattedValue = '';
+        for (let i = 0; i < value.length; i++) {
+            if (i > 0 && i % 4 === 0) {
+                formattedValue += ' ';
+            }
+            formattedValue += value[i];
+        }
+        input.value = formattedValue;
+        clearError(input);
+    });
+
+    // Güvenlik Kodu (CVV) - Sadece Rakam
+    document.getElementById('cvv').addEventListener('input', function (e) {
+        let input = e.target;
+        // Sadece rakamları tut
+        input.value = input.value.replace(/[^0-9]/g, ''); 
+        clearError(input);
+    });
+
+    // Kart Üzerindeki İsim (Sadece İngilizce Karakter, Boşluk ve Tire)
+    document.getElementById('card-name').addEventListener('input', function (e) {
+        let input = e.target;
+        // A-Z, a-z, boşluk ve tire (-) dışındaki her şeyi kaldırır.
+        input.value = input.value.replace(/[^A-Za-z\s-]/g, ''); 
+        clearError(input);
+    });
+    
+    // --- 3. Form Gönderiminde Kapsamlı Kontroller ---
+
+    document.getElementById('card-form-container').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        
+        const cardNumberInput = document.getElementById('card-number');
+        const cvvInput = document.getElementById('cvv');
+        const cardNameInput = document.getElementById('card-name');
+        const expMonthSelect = document.getElementById('exp-month');
+        const expYearSelect = document.getElementById('exp-year');
+        
+        let isValid = true;
+        
+        // Tüm hata mesajlarını temizle
+        [cardNumberInput, cvvInput, cardNameInput, expMonthSelect, expYearSelect].forEach(clearError);
+
+        // A. Kart Numarası Kontrolü (13-19 hane)
+        const cardNumber = cardNumberInput.value.replace(/\s/g, ''); 
+        if (cardNumber.length < 13 || cardNumber.length > 19 || !/^\d+$/.test(cardNumber)) {
+            displayError(cardNumberInput, 'Geçerli bir Kart Numarası giriniz (13-19 hane).');
+            isValid = false;
+        }
+
+        // B. CVV Kontrolü (3 veya 4 hane)
+        const cvv = cvvInput.value;
+        if (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv)) {
+            displayError(cvvInput, 'Geçerli bir CVV kodu giriniz (3 veya 4 hane).');
+            isValid = false;
+        }
+
+        // C. Kart Üzerindeki İsim Kontrolü (Boş olmamalı)
+        if (cardNameInput.value.trim() === '') {
+             displayError(cardNameInput, 'Kart üzerindeki isim boş olamaz.');
+             isValid = false;
+        }
+
+
+        // D. Son Kullanma Tarihi Kontrolü (Geçerli ve Gelecekte Olmalı)
+        const selectedMonth = parseInt(expMonthSelect.value);
+        const selectedYear = parseInt(expYearSelect.value);
+        
+        if (isNaN(selectedMonth) || isNaN(selectedYear)) {
+            // Dropdown'ların zaten 'required' olması bu durumu nadiren gösterir
+            displayError(expYearSelect, 'Lütfen son kullanma tarihini seçiniz.');
+            isValid = false;
+        } else {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            // JS'de aylar 0 (Ocak) ile başlar, seçilen ay 1'den başlar, bu yüzden 1 çıkarılır.
+            const currentMonth = currentDate.getMonth() + 1; 
+
+            if (selectedYear < currentYear) {
+                // Seçilen yıl geçmişte
+                displayError(expYearSelect, 'Son kullanma tarihi geçmiş olamaz.');
+                isValid = false;
+            } else if (selectedYear === currentYear && selectedMonth < currentMonth) {
+                // Seçilen yıl güncel yıl ancak seçilen ay geçmişte
+                displayError(expYearSelect, 'Seçilen ay geçmiş bir tarih.');
+                isValid = false;
+            }
+        }
+  
+    });
+// odeme.html sayfasında
+window.onload = function() {
+    let odemeTutari = localStorage.getItem("odemeToplamTutar") || "0.00";
+    
+    // Ödeme tutarını ekranda göster
+    document.getElementById("odemeTutari").innerText = "₺" + odemeTutari;
+    
+    // Form gönderiminde kullanmak için
+    document.getElementById("tutarInput").value = odemeTutari;
+};
+    // Bu kod ödeme sayfanızın JS bloğuna veya dosyasına eklenmelidir.
+document.addEventListener('DOMContentLoaded', () => {
+    // LocalStorage'dan sepetin nihai tutarını çek
+    const odenecekTutar = localStorage.getItem('odemeToplamTutar');
+    
+    // Formatlama ve Varsayılan değer atama (Tutar yoksa 0.00)
+    const nihaiTutar = odenecekTutar ? odenecekTutar : '0.00'; 
+    const formatliTutar = parseFloat(nihaiTutar).toFixed(2);
+    
+    // Ödeme Butonunu Güncelle
+    const payButton = document.querySelector('.pay-button'); 
+    
+    if (payButton) {
+        payButton.innerHTML = `<i class="fas fa-lock"></i>Şimdi Öde ${formatliTutar} TRY`; 
+        
+    }
+});
+    </script>
+
+</body>
+</html>

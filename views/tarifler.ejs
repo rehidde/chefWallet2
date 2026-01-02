@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chefWallet | Sağlıklı Tarifler</title>
+    <!-- GENEL CSS -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/tarifler.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+    <div class="logo">chefWallet</div>
+    <nav>
+    <a href="/">Ana Sayfa</a>
+    <a href="/tarifler">Tarifler</a>
+    <a href="/market">Market</a>
+    <a href="/hakkimizda">Hakkımızda</a>
+    <a href="/iletisim">İletişim</a>
+
+    </nav>
+     <div class="user-actions">
+  <% if (user) { %>
+    <span class="welcome-text">
+      <a href="/cikis" class="logout-btn">Çıkış Yap</a>
+      Hoşgeldiniz, <strong><%= user.username %></strong>
+    </span>
+    <a href="/sepet" class="cart-link">🛒</a>
+  <% } else { %>
+    <a href="/giris" class="login-link">👤 Giriş Yap</a>
+    <a href="/sepet" class="cart-link">🛒</a>
+  <% } %>
+</div>
+</header>
+
+    <div class="campaign-bar-wrapper">
+    <div class="campaign-marquee">
+        <p class="campaign-text">KAMPANYA!! Tariflerden toplu malzeme alımında %20 indirim!!</p>
+    </div>
+</div>
+
+    <section class="hero-recipes-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Sağlıklı Tarifler</h1>
+            <p class="hero-subtitle">Vücudunu besleyen, ruhunu doyuran, basit ve temiz lezzetler.</p>
+            <button class="hero-button" onclick="scrollToRecipes()">Yeni Tariflere Göz At</button>
+        </div>
+        <div class="hero-recipe-image-placeholder">
+            </div>
+    </section>
+
+    <div class="main-container recipes-list-container" id="recipes-list">
+
+        <h2>Popüler Sağlıklı Lezzetler</h2>
+
+        <div class="recipe-card left-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim1.jpg" alt="Kabak Kavurma" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Kabak Kavurma Tarifi</h3>
+                <p class="description">Omega-3 deposu, hafif ve besleyici bir ana öğün.</p>
+                <button class="recipe-button" onclick="openModal('recipe1')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe1')">
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+        <div class="recipe-card right-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim2.jpg" alt="Mantar Yemeği" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Mantar Yemeği</h3>
+                <p class="description">Protein ve lif dolu, geleneksel lezzete modern bir dokunuş.</p>
+                <button class="recipe-button" onclick="openModal('recipe2')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe2')">
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+        <div class="recipe-card left-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim3.jpg" alt="Fırında Bütün Karnabahar" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Fırında Bütün Karnabahar</h3>
+                <p class="description">Güne zinde başlamak için hızlı, doyurucu ve bol vitaminli bir kase.</p>
+                <button class="recipe-button" onclick="openModal('recipe3')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe3')"> 
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+        <div class="recipe-card right-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim4.jpg" alt="Palamut Buğulama" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Palamut Buğulama</h3>
+                <p class="description">Sağlıklı yağlar ve yüksek proteinle dengeli, pratik bir öğle yemeği.</p>
+                <button class="recipe-button" onclick="openModal('recipe4')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe4')">
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+        
+        <div class="recipe-card left-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim5.jpg" alt="Fırında Kabak" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Fırında Kabak</h3>
+                <p class="description">Glutensiz ve doyurucu; kış aylarının en hafif tercihi.</p>
+                <button class="recipe-button" onclick="openModal('recipe5')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe5')">
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+        <div class="recipe-card right-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim6.jpg" alt="Ratatoille Tarifi" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Ratatoille Tarifi</h3>
+                <p class="description">Klasik cipse sağlıklı bir alternatif; düşük yağlı ve lezzetli.</p>
+                <button class="recipe-button" onclick="openModal('recipe6')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe6')">
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+        <div class="recipe-card left-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim7.jpg" alt="Zeytinyağlı Enginar" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Zeytinyağlı Enginar</h3>
+                <p class="description">Hızlıca hazırlanan, rengarenk ve doyurucu Uzak Doğu esintisi.</p>
+                <button class="recipe-button" onclick="openModal('recipe7')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe7')">
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+        <div class="recipe-card right-image">
+            <div class="recipe-image-placeholder">
+                <img src="images/resim8.jpg" alt="Elma Cacığı ve Közlenmiş Patlıcan" class="modal-image">
+            </div>
+            <div class="recipe-info">
+                <h3>Elma Cacığı ve Közlenmiş Patlıcan</h3>
+                <p class="description">Egzersiz öncesi veya ara öğün için mükemmel enerji kaynağı.</p>
+                <button class="recipe-button" onclick="openModal('recipe8')">Tarifi Göster</button>
+                <button class="add-to-cart-button" 
+                    onclick="addToCartByRecipeId('recipe8')">
+                    Malzemeleri Sepete Ekle
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="recipe1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe1')">&times;</span>
+            <h2 class="modal-title">Kabak Kavurma Tarifi</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>2 adet kabak</li>
+                <li>1 adet orta boy havuç</li>
+                <li>1 adet soğan</li>
+                <li>5 yemek kaşığı zeytinyağı</li>
+                <li>1/4 çay kaşığı karabiber</li>
+                <li>1 çay kaşığı tuz</li>
+            </ul>
+            <h3>Üzeri İçin</h3>
+            <ul>
+                <li>1 su bardağı yoğurt</li>
+                <li>3-4 dal dereotu</li>
+                <li>1 diş sarımsak</li>
+                <li>1 çay kaşığı tuz</li> 
+            </ul>
+            <h3>Sosu İçin</h3>
+            <ul>
+                <li>3-4 adet ceviz içi</li>
+                <li>4 yemek kaşığı zeytinyağı</li>
+                <li>1 çay kaşığı toz kırmızı biber</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>Kabak kavurma için kabak ve havuçları güzelce yıkayın ve uç kısımlarını kesin. Ardından, kabakları yarım ay şeklinde ince dilimler halinde kesin. Soğanı da jülyen doğrayın.</li>
+                <li>Geniş bir tavaya sıvı yağı ekleyin ve ısındığında doğranmış soğanı ekleyin. Soğanlar pembeleşene kadar kavurun. Havuçları ekleyip kavurmaya devam edin.</li>
+                <li>Bir kapta yoğurt sarımsak ve dereotunu karıştırın. Pişen kabağı servis tabağına alın.</li>
+                <li>Üzerine yoğurt gezdirin. Tavada yağı kızdırın. Üzerine ceviz ekleyin. Sosu yoğurt üzerine gezdirin. Kabak kavurma hazır! Afiyet olsun.</li>
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 20 dakika | **Hazırlık Süresi:** 10 dakika
+            </p>
+        </div>
+    </div>
+
+    <div id="recipe2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe2')">&times;</span>
+            <h2 class="modal-title">Mantar Yemeği</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>500 gram mantar</li>
+                <li>1 yemek kaşığı tereyağ</li>
+                <li>2 yemek kaşığı zeytinyağı</li>
+                <li>2 diş sarımsak</li>
+                <li>1 çay kaşığı tuz</li>
+                <li>1 çay kaşığı karabiber</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>Mantar yemeği için ilk olarak, ocağın üzerine sağlam bir demir döküm veya yanmaz yapışmaz tavayı alın. Ardından, ocağı kısık ateşe getirin ve içine zeytinyağını ekleyin. Zeytinyağı kızardığında ve tava iyice ısındığında, doğranmış mantarları tavanın içine ekleyin.</li>
+                <li>Orta ateşe alın ve mantarların üzerine az miktarda tuz atın, bu şekilde bir süre pişmeye bırakın. Tuzu attıktan sonra, karışımı karıştırmamaya özen gösterin.</li>
+                <li>Mantarların bir tarafının rengi hafif değiştiğinde, karışımı karıştırın ve üzerine tereyağını ekleyin. Tereyağını hafifçe karıştırarak soteleyin. Son olarak, rendelenmiş sarımsakları ekleyin.</li>
+                <li>Ortalama 10-15 dakikalık yavaş pişirme sürecinin ardından tavayı ocaktan alın ve üzerine tuz ve karabiber ekleyin. Bu nefis mantar yemeğini sıcak sıcak servis edin ve lezzetin tadını çıkarın. Afiyet olsun!</li>
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 15 dakika | **Hazırlama Süresi** 10 dakika
+            </p>
+        </div>
+    </div>
+    
+    <div id="recipe3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe3')">&times;</span>
+            <h2 class="modal-title">Fırında Bütün Karnabahar</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>1 adet karnabahar</li>
+                <li>1 yemek kaşığı hardal</li>
+                <li>1/2 çay kaşığı köri</li>
+                <li>1 çay kaşığı toz kırmızı biber</li>
+                <li>1 çay kaşığı karabiber</li>
+                <li> 1 çay kaşığı toz sarımsak</li>
+                <li> 1 tatlı kaşığı tuz</li>
+                <li>2 yemek kaşığı tereyağı</li>
+                <li>1 tutam maydanoz</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>Karnabaharın yeşil yapraklarını ayırın ve sapını hafifçe kesin. Tencereye alın ve yarısına gelecek kadar kaynar su ekleyip ocağa alın. 10 dakika haşlayın.</li>
+                <li>Haşlanan karnabaharı bir fırın kabına alın.</li>
+                <li>Hardal, köri, tuz ve toz sarımsağı karıştırın. Üzerine eritilmiş tereyağı ekleyin ve sosu karıştırın.</li>
+                <li>Sosu üzerine sürün. Önceden ısıtılmış 200 derece fırında 25 dakika pişirin.</li>
+                <li>Üzerine kıyılmış maydanoz serpiştirip servis edin. Afiyet olsun!</li>
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 15 dakika | **Hazırlama Süresi** 35 dakika
+            </p>
+        </div>
+    </div>
+
+    <div id="recipe4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe4')">&times;</span>
+            <h2 class="modal-title">Palamut Buğulama</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>2 adet orta boy palamut balığı</li>
+                <li>2 adet mor soğan</li>
+                <li>1 adet beyaz soğan</li>
+                <li>3 adet yeşil biber</li>
+                <li>2 diş sarımsak</li>
+                <li>2 adet büyük boy domates</li>
+                <li>1/4 adet limon suyu</li>
+                <li>4 yemek kaşığı zeytinyağı</li>
+                <li>1 çay kaşığı karabiber</li>
+                <li>2 çay kaşığı tuz</li>
+                <li>1 çay bardağı su</li>
+                <li>2-3 adet defne yaprağı</li>
+                <li>5-6 dilim limon</li>
+                <li>1 yemek kaşığı tereyağı</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>Tencereye zeytinyağını ekleyin ve üzerine mor soğanları yerleştirin.</li>
+                <li>Üzerine beyaz soğanları ve biberleri ekleyin.</li>
+                <li>Üzerine balıkları ve domatesleri dizin. Limonları da ekleyin.</li>
+                <li>Defne yapraklarını, suyu ve tereyağı parçalarını da ekleyin. Aralarına sarımsak dilimlerini ve limon suyunu ilave edin. Tuz ve karabiberi ekleyin.</li>
+                <li>Bu aşamada kullandığınız tencere fırına dayanıklı ise fırına da verebilirsiniz. Bu tarifi direkt fırın kabı ile de yapabilirsiniz. Fırında pişme süresi 190 derecede 20-25 dakika kadar sürecektir.  Ocakta pişirmek isterseniz tencerenin kapağını kapatarak önce içerisindeki su kaynayana kadar yüksek ateşte, ardından kısık ateşte yarım saat pişirin.</li>
+                <li>Leziz balığınız hazır. Ilık servis etmenizi öneririz.</li>
+                <li>Yanında bir parça kızarmış ekmek ile tadına doyamayacaksınız. Şimdiden afiyet olsun!</li>
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 30 dakika | **Hazırlık Süresi:** 30 dakika
+            </p>
+        </div>
+    </div>
+    
+    
+    <div id="recipe5" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe5')">&times;</span>
+            <h2 class="modal-title">Fırında Kabak</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>1 adet kabak</li>
+                <li>2 yemek kaşığı zeytinyağı</li>
+                <li>1 tatlı kaşığı pul biber</li>
+                <li>1/2 çay kaşığı tuz</li>
+                <li>1/4 çay kaşığı karabiber</li>
+                <li>1 kase dereotlu yoğurt</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>Kabağı halka halka doğrayın ve bir kaseye ekleyin.</li>
+                <li>Üzerine pul biberi, karabiberi ve tuzu ekleyin. Yağı ekleyin, güzelce harmanlayın.</li>
+                <li>Yağlı kağıt eklediğiniz ya da yağladığınız fırın tepsisine kabakları dizin.</li>
+                <li>190 dereceye ayarlı önceden ısıtılmış fırında 20 dakika kadar pişirin. Daha kıtır ve koyu renkli olsunlar isterseniz 10 dakikada bir çevirerek 30-35 dakika kadar pişirebilirsiniz. Dereotlu yoğurt ile servis edin. Afiyet olsun!</li>
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 20 dakika | **Hazırlama Süresi:** 10 dakika
+            </p>
+        </div>
+    </div>
+
+    <div id="recipe6" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe6')">&times;</span>
+            <h2 class="modal-title">Ratatoille</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>2 yemek kaşığı zeytinyağı</li>
+                <li>1/2 adet soğan</li>
+                <li>1 adet kapya biber</li>
+                <li>2 adet domates</li>
+                <li>3-4 dal taze kekik</li>
+                <li>1 tatlı kaşığı toz şeker</li>
+                <li>1 çay kaşığı tuz</li>
+                <li>1/2 çay kaşığı karabiber</li>
+                <li>2 diş sarımsak</li>
+            </ul>
+            <h3>Ratatouille Sebzeleri İçin</h3>
+            <ul>
+                <li>2 adet orta boy kabak</li>
+                <li>2 adet orta boy patlıcan</li>
+                <li>1 adet domates</li>
+                <li>1 tatlı kaşığı tuz</li>
+                <li>1 çay kaşığı karabiber</li>
+                <li>1/2 çay bardağı zeytinyağı</li>
+            </ul>
+            <h3>Üzeri İçin</h3>
+            <ul>
+                <li> 3-4 yemek kaşığı zeytinyağı</li>
+                <li>1-2 dal taze kekik</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>Ratatuy tarifi için önce kapya biberi ocak üzerine bir sac koyarak közleyin. Ardından, biber hala sıcakken, lezzetini koruması için üzerini streç filmle kapatıp bir tabağa alın.</li>
+                <li>Mutfak robotuna domatesleri ekleyerek püre haline getirin. Közlenmiş kırmızı biberin kabuklarını soyarak mutfak robota ekleyin ve domateslerle birlikte pürüzsüz bir kıvam elde edene kadar karıştırın.</li>
+                <li>Zeytinyağı ile incecik doğradığınız soğanı bir tavaya alın. Kısık ateşte yavaşça kavurmaya başlayın. İsteğe bağlı olarak sarımsak ekleyerek kavurma işlemine devam edebilirsiniz.</li>
+                <li>Yumuşayan soğanların üzerine domates sosunu ekleyin. Toz şeker, tuz, karabiber ve taze kekiği ilave ederek, kısık ateşte 10-15 dakika pişirin.</li>
+                <li>Kıvamı hafif koyulaşan sosun içinden kekiği çıkarın ve fırına dayanıklı bir kabın tabanına sosu yayın.</li>
+                
+                <li>Ratatouille Sebzeleri İçin: Patlıcanları kabuklarıyla birlikte ince ince ve yuvarlak bir biçimde doğrayın. Tuzlu suyun içerisinde 15 dakika kadar acı suyunun çıkması için bekletin. Ardından suyunu süzdürün.</li>
+                <li>Kabakları ince ince doğrayın. Domatesleri de aynı boyut ve şekillerde doğrayın. Tüm sebzeleri bir kabın içine alın. Üzerlerine zeytinyağı, tuz ve baharatları ilave edin.</li>
+                <li>Domates sosunu yaydığınız kabın içine, sebzelerinizi dıştan içe doğru yan yana dizin.</li>
+                <li>Üzerlerine zeytinyağı gezdirin. Taze kekik yapraklarını üzerine ekleyin.</li>
+                <li>Üzerini alüminyum folyo ile kapatıp üzerine bıçakla 4-5 delik açın. Önceden ısıtılmış 190 derece fırında 20 dakika pişirin.</li>
+                <li>20 dakika sonunda folyoyu kaldırın ve bu şekilde bir 30 dakika daha pişirin.</li>
+                <li>Üzeri hafifçe kızaran ratatouille hazır. Afiyet olsun!</li>
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 50 dakika | **Hazırlama Süresi:** 20 dakika
+            </p>
+        </div>
+    </div>
+
+    <div id="recipe7" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe7')">&times;</span>
+            <h2 class="modal-title">Zeytinyağlı Enginar</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>1/2 su bardağı zeytinyağı</li>
+                <li>1 adet orta boy kuru soğan</li>
+                <li>1 adet patates</li>
+                <li>1 adet büyük boy havuç</li>
+                <li>1 su bardağı dondurulmuş bezelye</li>
+                <li>8 adet ayıklanmış enginar</li>
+                <li>2 adet taze sıkılmış limon suyu</li>
+                <li>1 su bardağı su</li>
+                <li>1 tatlı kaşığı toz şeker</li>
+                <li>1 çay kaşığı tuz</li>
+                <li>1/4 demet dereotu</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>Zeytinyağlı enginar için bir tavada yarım su bardağı zeytinyağı ile 1 adet küp doğranmış soğanı hafif pembeleşinceye kadar kavurun.</li>
+                <li>Üzerine küp doğranmış ve haşlanmış, 1'er adet patates ve havucu da ekleyip 2-3 dakika bu şekilde kavurun.</li>
+                <li>1 su bardağı bezelyeyi de üzerine ekledikten 3-4 dakika sonra garnitürünüzü ocaktan alın.</li>
+                <li>Enginarları pişireceğiniz sosu hazırlamak için bir kapta 2 adet sıkılmış limon suyu, 1 su bardağı su,  1 tatlı kaşığı toz şeker, 1 çay kaşığı tuz ve 2 yemek zeytinyağını karıştırın.</li>
+                <li>Geniş bir tencereye 8 adet enginarı yerleştirin ve üzerlerine hazırladığınız garnitürden koyun.</li>
+                <li>Limonlu su karışımını da tencereye aktarın.</li>
+                <li>Ardından kapağını kapatıp, enginarlar yumuşayana kadar pişirin.</li>
+                <li>Zeytinyağlı enginar hazır. Ilık ya da soğuk tüketebilirsiniz. Afiyet olsun.</li>
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 1 saat | **Hazırlama Süresi:** 30 dakika
+            </p>
+        </div>
+    </div>
+    
+    <div id="recipe8" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('recipe8')">&times;</span>
+            <h2 class="modal-title">Elma Cacığı ve Közlenmiş Patlıcan</h2>
+            <hr>
+            <h3>Gereken Malzemeler</h3>
+            <ul>
+                <li>2 yemek kaşığı zeytinyağı</li>
+                <li>1/2 çay kaşığı sarımsak tozu</li>
+                <li>1/2 çay kaşığı soğan tozu</li>
+                <li>1 adet bostan patlıcanı</li>
+                <li>1 tutam taze nane</li>
+                <li>1 tutam taze reyhan otu</li>
+                <li>1 tutam dereotu</li>
+                <li>1 tutam taze fesleğen</li>
+            </ul>
+            <h3> Sosu İçin </h3>
+            <ul>
+                <li>3 yemek kaşığı zeytinyağı</li>
+                <li>1 diş sarımsak</li>
+                <li>1 yemek kaşığı dolmalık fıstık</li>
+                <li>1 çay kaşığı kırmızı toz biber</li>
+                <li>1/2 su bardağı domates püresi</li>
+                <li>5 adet kurutulmuş domates</li>
+                <li>1/2 çay kaşığı tuz</li>
+            </ul>
+            <h3> Elma Cacığı İçin </h3>
+            <ul>
+                <li>2 adet yeşil elma</li>
+                <li>250 gram süzme yoğurt</li>
+                <li>4 yemek kaşığı turna yemişi (cranberry)</li>
+            </ul>
+            <h3>Nasıl Yapılır?</h3>
+            <ol>
+                <li>TBir kasede zeytinyağı, sarımsak ve soğan tozunu karıştırın.</li>
+                <li>Bostan patlıcanı ortadan ikiye bölün ve iç kısmına kesik atıp yağ sürün. Közmatikte arkalı önlü 5 dakika közleyin.</li>
+                <li>Sosu için; bir sos tenceresinde sarımsağı zeytinyağı ile birlikte kızdırın.</li>
+                <li>Üzerine tuz, dolmalık fıstık, kırmızı toz biber, domates püresi ve kurutulmuş domates ekleyip bir taşım kaynatın ve ocaktan alın.</li>
+                <li>Elma cacığı için; bir kasede süzme yoğurt, cranberry ve yeşil elmaları karıştırın.</li>
+                <li>Servis edeceğiniz tabağın tabanına elma cacığından yayın.</li>
+                <li>Üzerine hazırladığınız sos ve patlıcanı yerleştirin.</li>
+                <li>Kurutulmuş domates, cranberry ve taze yeşilliklerden üzerine serpiştirip, servis edin. Afiyet olsun!</li>
+
+            </ol>
+            <p class="details">
+                **Pişirme Süresi:** 15 dakika | **Hazırlama Süresi:** 15 dakika
+            </p>
+        </div>
+    </div>
+    
+    <div id="notificationModal" class="modal notification-modal">
+        <div class="modal-content notification-content">
+            <span class="close-btn" onclick="closeNotificationModal()">&times;</span>
+            <h3 class="modal-title" id="notificationRecipeName">Malzemeler Sepete Eklendi!</h3>
+            <p>Seçtiğin tarifin malzemeleri alışveriş listene başarıyla eklendi.</p>
+            <div class="notification-actions">
+                <button class="btn btn-secondary" onclick="closeNotificationModal()">Sayfada Kal</button>
+                <a href="/sepet" class="btn btn-primary">Sepete Git</a>
+            </div>
+        </div>
+    </div>
+ 
+    <footer class="full-footer">
+    <div class="footer-content">
+        
+        <div class="footer-section">
+            <div class="footer-logo">chefWallet</div>
+            <p>Tarif ve market alışverişini tek platformda buluşturan dijital mutfak yardımcınız.</p>
+            <p style="margin-top: 10px;">&copy; 2025 chefWallet</p>
+        </div>
+
+        <div class="footer-section">
+            <h4>Hızlı Erişim</h4>
+            <ul>
+                <li><a href="/index">Ana Sayfa</a></li>
+                <li><a href="/tarifler">Tüm Tarifler</a></li>
+                <li><a href="/market">Market Sayfası</a></li>
+                <li><a href="/hakkimizda">Hakkımızda</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Yardım</h4>
+            <ul>
+                <li><a href="iletisim">İletişim</a></li>
+                <li><a href="#">Sıkça Sorulan Sorular</a></li>
+                <li><a href="#">Kullanım Şartları</a></li>
+                <li><a href="#">Gizlilik Politikası</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Bize Ulaşın</h4>
+            <p>E-posta: info@chefwallet.com</p>
+            <p>Tel: +90 555 123 45 67</p>
+            <div class="footer-social-links" style="margin-top: 15px;">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+        
+    </div>
+    <div class="footer-bottom">
+        chefWallet Projesi | Tüm Hakları Saklıdır.
+    </div>
+</footer>
+
+<script src="js/tarifler.js"></script>
+
+</body>
+</html>

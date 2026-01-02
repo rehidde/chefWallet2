@@ -1,0 +1,274 @@
+/* Body'yi dikeyde esnek yapıp içeriği ortalamak için */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: var(--misty-rose); 
+            color: var(--rosewood);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        /* Navigasyon ve Footer dışındaki ana içerik alanı */
+        .main-container {
+            max-width: 1400px; /* GENİŞLİK VE SİMETRİ İÇİN MAKSİMUM KISITLAMA */
+            width: 90%; /* Daha küçük ekranlarda da esnek kalması için %90 genişlik */
+            margin: 20px auto; /* SAYFANIN ORTALANMASINI VE SİMETRİYİ GARANTİ EDER */
+            padding: 1rem;
+            flex-grow: 1; /* İçeriğin dikeyde esnek kalmasını sağlar */
+        }
+
+        .cart-grid {
+            display: grid;
+            grid-template-columns: 4fr 300px; /* Ürünler 4 pay, Özet 300px sabit */
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .products-section, .summary-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(101, 0, 11, 0.15);
+            overflow: hidden;
+            border: 1px solid var(--misty-rose);
+            width: 100%; 
+        }
+
+        .summary-section {
+            position: sticky;
+            top: 20px;
+        }
+
+        /* Sepet Başlık ve Kargo */
+        .cart-header { padding: 1.5rem; border-bottom: 1px solid var(--misty-rose); }
+        .cart-title { color: var(--rosewood); font-weight: 700; margin: 0; font-size: 1.5rem; }
+        .free-shipping { background: var(--misty-rose); padding: 1rem; margin: 0 1.5rem 1rem; border-radius: 8px; border: 1px dashed var(--rosewood); }
+        .shipping-text { color: var(--rosewood); font-weight: 600; margin: 0; font-size: 1rem; text-align: center; }
+        .cart-title i, .shipping-text i { margin-right: 8px; }
+
+        /* Ürün Kartı Stilleri */
+        .product-card { padding: 1.5rem; border-bottom: 1px solid #f0f0f0; display: flex; align-items: flex-start; gap: 1rem; transition: background-color 0.2s; background-color: #e8b5b8;
+}
+        .product-card:hover { background-color: var(--light-rose); }
+        .product-card:last-child { border-bottom: none; }
+        .product-image { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 2px solid var(--misty-rose); flex-shrink: 0; }
+        .product-info { flex: 1; min-width: 0; }
+        .product-name { color: var(--rosewood); font-weight: 700; margin-bottom: 0.25rem; font-size: 1rem; }
+        .product-description { color: var(--misty-rose); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .product-price { color: var(--rosewood); font-weight: 700; font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+        /* Miktar Kontrolleri */
+        .quantity-controls { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0; }
+        .quantity-btn { width: 32px; height: 32px; border: 2px solid var(--rosewood); background: white; color: var(--rosewood); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; transition: all 0.2s ease; cursor: pointer; }
+        .quantity-btn:hover { background: var(--rosewood); color: white; transform: scale(1.1); }
+        .quantity-display { min-width: 40px; text-align: center; font-weight: 700; color: var(--rosewood); }
+
+        /* Sil Butonu */
+        .delete-btn { color: #999; background: none; border: none; font-size: 0.9rem; padding: 0.5rem; cursor: pointer; transition: color 0.2s, transform 0.2s; flex-shrink: 0; margin-top: 15px; }
+        .delete-btn:hover { color: red; transform: scale(1.2); }
+
+        /* Özet Kartı Stilleri */
+        .summary-card { padding: 1.5rem; }
+        .summary-title { color: var(--rosewood); font-weight: 600; margin-bottom: 1.5rem; font-size: 1.2rem; text-align: center; }
+        .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--misty-rose); }
+        .summary-total { font-weight: 800; font-size: 1.3rem; border-bottom: none; padding-top: 1rem; color: var(--rosewood); }
+        
+        /* Kupon Bölümü */
+        .coupon-section { padding: 1rem 0; border-bottom: 1px solid var(--misty-rose); margin-bottom: 1rem; }
+        .coupon-input-group { display: flex; gap: 0.5rem; align-items: center; }
+        .coupon-input { flex-grow: 1; padding: 0.5rem; border: 1px solid var(--misty-rose); border-radius: 6px; font-size: 0.9rem; }
+        .apply-coupon-btn { background: var(--rosewood); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; white-space: nowrap; cursor: pointer; transition: background-color 0.2s, transform 0.1s; }
+        .apply-coupon-btn:hover { background: var(--dark-rose); }
+
+        /* Ödeme ve Devam Et Butonları */
+        .checkout-btn { background: var(--rosewood); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-weight: 700; width: 100%; margin-top: 1rem; transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s; box-shadow: 0 4px 6px rgba(101, 0, 11, 0.3); cursor: pointer; }
+        .checkout-btn:hover { background: var(--dark-rose); box-shadow: 0 6px 10px rgba(101, 0, 11, 0.4); }
+        .checkout-btn i { margin-right: 8px; }
+
+        .continue-shopping { color: var(--rosewood); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; transition: color 0.2s, transform 0.2s; width: 100%; justify-content: center; padding: 0.75rem; }
+        .continue-shopping:hover { color: var(--dark-rose); transform: translateX(-5px); }
+        .continue-shopping i { margin-right: 0; } 
+
+        /* Güven Rozetleri ve Sosyal Medya */
+        .trust-badges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--misty-rose); }
+        .trust-badge { text-align: center; color: var(--rosewood); transition: color 0.2s; }
+        .badge-icon { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--rosewood); }
+        .badge-text { font-size: 0.75rem; font-weight: 500; }
+        .follow-section { text-align: center; margin-top: 2rem; padding: 1rem; }
+        .follow-text { color: var(--rosewood); font-size: 0.9rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .social-icons { display: flex; justify-content: center; gap: 1rem; }
+        .social-icon { width: 40px; height: 40px; border: 1px solid var(--rosewood); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--rosewood); text-decoration: none; font-size: 1rem; transition: background-color 0.2s, color 0.2s, transform 0.2s; }
+        .social-icon:hover { background: var(--rosewood); color: white; transform: rotate(5deg) scale(1.1); }
+        
+        /* Mobil Uyumlu Stiller (Responsive) */
+        @media (max-width: 768px) {
+            .cart-grid { 
+                grid-template-columns: 1fr; /* Mobil cihazlarda tek sütun */
+                gap: 1rem; 
+            }
+            .summary-section { position: static; }
+            .product-card { flex-direction: column; text-align: center; gap: 1rem; }
+            .quantity-controls { justify-content: center; }
+            .trust-badges { grid-template-columns: 1fr; gap: 1rem; }
+            .social-icons { gap: 0.5rem; }
+            .coupon-input-group { flex-direction: column; }
+            .coupon-input, .apply-coupon-btn { width: 100%; }
+            .delete-btn { margin-top: 0; }
+        }
+
+.logout-btn {
+  background-color: #70020f;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+/* ===================================== */
+/* 🧾 SEPET SAĞ PANEL – ÖZET & KUPON */
+/* ===================================== */
+
+.summary-section {
+    position: sticky;
+    top: 110px;
+    height: fit-content;
+}
+
+.summary-card {
+    background-color: var(--white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 30px rgba(112, 2, 15, 0.15);
+    border: 2px solid var(--misty-rose);
+    text-align: left;
+}
+
+/* Satırlar */
+.summary-card > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 15px;
+    color: var(--rosewood);
+}
+
+.summary-card strong {
+    font-size: 18px;
+}
+
+/* Toplam çizgisi */
+.summary-card > div:last-of-type {
+    border-top: 2px dashed var(--misty-rose);
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+/* ============================= */
+/* 🎟️ KUPON ALANI */
+/* ============================= */
+
+.coupon-box {
+    margin-top: 22px;
+    padding: 15px;
+    background-color: var(--misty-rose);
+    border-radius: 12px;
+    border: 2px dashed var(--rosewood);
+}
+
+.coupon-box label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--rosewood);
+    margin-bottom: 6px;
+}
+
+.coupon-box input {
+    width: 100%;
+    padding: 11px;
+    border-radius: 8px;
+    border: 2px solid var(--rosewood);
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+.coupon-box input:focus {
+    border-color: #920315;
+}
+
+.coupon-box button {
+    width: 100%;
+    padding: 11px;
+    background-color: var(--rosewood);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.coupon-box button:hover {
+    background-color: #920315;
+}
+
+/* Kupon mesajı */
+#kuponMesaj {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    min-height: 18px;
+}
+
+/* ============================= */
+/* 💳 ÖDEME BUTONU */
+/* ============================= */
+
+.summary-card button[onclick*="odeme"] {
+    width: 100%;
+    margin-top: 18px;
+    padding: 14px;
+    background-color: var(--rosewood);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(112, 2, 15, 0.3);
+    transition: 0.3s;
+}
+
+.summary-card button[onclick*="odeme"]:hover {
+    background-color: #920315;
+    transform: translateY(-1px);
+}
+
+/* Alışverişe devam */
+.summary-card a {
+    display: block;
+    margin-top: 12px;
+    text-align: center;
+    color: var(--rosewood);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.summary-card a:hover {
+    text-decoration: underline;
+}
+
+/* ============================= */
+/* 📱 MOBİL */
+/* ============================= */
+
+@media (max-width: 900px) {
+    .summary-section {
+        position: static;
+        margin-top: 30px;
+    }
+}

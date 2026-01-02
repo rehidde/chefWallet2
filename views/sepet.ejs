@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>chefWallet | Sepetim</title>
+
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/sepet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">chefWallet</div>
+
+    <nav>
+        <a href="/">Ana Sayfa</a>
+        <a href="/tarifler">Tarifler</a>
+        <a href="/market">Market</a>
+        <a href="/hakkimizda">Hakkımızda</a>
+        <a href="/iletisim">İletişim</a>
+    </nav>
+
+    <div class="user-actions">
+        <% if (user) { %>
+            <span class="welcome-text">
+                Hoşgeldiniz, <strong><%= user.username %></strong>
+            </span>
+            <a href="/sepet" class="cart-link">🛒</a>
+        <% } else { %>
+            <a href="/giris" class="login-link">👤 Giriş Yap</a>
+            <a href="/sepet" class="cart-link">🛒</a>
+        <% } %>
+    </div>
+</header>
+
+
+<div class="main-container">
+    <div class="cart-grid">
+
+        <!-- SOL – ÜRÜNLER -->
+        <div class="products-section" id="sepetAlani">
+
+            <div class="cart-header">
+                <h1 class="cart-title">
+                    <i class="fas fa-shopping-cart"></i> Sepetim
+                </h1>
+            </div>
+
+            <% if (sepet.length === 0) { %>
+                <p style="padding: 20px;">Sepet boş</p>
+            <% } %>
+
+            <% sepet.forEach(item => { %>
+            
+            <div class="product-card">
+
+                <!-- Ürün Resmi -->
+                <img 
+                    src="<%= item.Urun.resim || '/images/default.png' %>" 
+                    alt="Ürün Görseli"
+                    class="product-image"
+                >
+
+                <!-- Ürün Bilgileri -->
+                <div class="product-info">
+
+                    <div class="product-name"><%= item.Urun.ad %></div>
+
+                    <div class="product-price"><%= item.Urun.fiyat %> ₺</div>
+
+                    <!-- ADET KONTROL -->
+                    <div class="quantity-controls">
+
+                        <!-- Azalt -->
+                        <form action="/api/sepet/azalt" method="POST">
+                            <input type="hidden" name="urun_id" value="<%= item.urun_id %>">
+                            <button class="quantity-btn">-</button>
+                        </form>
+
+                        <span class="quantity-display"><%= item.adet %></span>
+
+                        <!-- Arttır -->
+                        <form action="api/sepet/arttir" method="POST">
+                            <input type="hidden" name="urun_id" value="<%= item.urun_id %>">
+                            <button class="quantity-btn">+</button>
+                        </form>
+                    </div>
+
+                    <!-- Ara toplam -->
+                    <div class="product-price">
+                        <strong>Ara Toplam:</strong>
+                        <%= item.adet * item.Urun.fiyat %> ₺
+                    </div>
+
+                    <!-- Sil -->
+                    <form action="/api/sepet/sil" method="POST">
+                        <input type="hidden" name="urun_id" value="<%= item.urun_id %>">
+                        <button class="delete-btn">Sil</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <% }) %>
+
+        </div>
+
+
+
+        <!-- SAĞ – SİPARİŞ ÖZETİ -->
+        <div class="summary-section">
+            <div class="summary-card">
+                <% if (toplamFiyat === 0) { %>
+      <small style="color:#999;">
+        Sepetiniz boş
+      </small>
+    <% } else if (kargoUcreti > 0) { %>
+      <small style="color:#999;">
+        150 ₺ üzeri alışverişlerde kargo ücretsiz
+      </small>
+    <% } else { %>
+      <small style="color:green;">
+        🎉 Kargo ücretsiz!
+      </small>
+    <% } %>
+                <div><span>Ürünler:</span> <%= toplamFiyat %> ₺</div>
+                <div>
+                <span>Kargo:</span>
+                <span><%= kargoUcreti > 0 ? kargoYazi : "Ücretsiz" %></span>
+                </div>
+                <div><span>İndirim:</span> <%= indirim %> ₺</div>
+
+                <div><strong>Toplam:</strong> <%= odenecekTutar %> ₺</div>
+
+
+                <!-- Kupon Alanı -->
+                <div class="coupon-box">
+                    <label>Kupon Kodu</label>
+
+                    <input type="text" id="kuponGiris" placeholder="Kupon kodunu girin">
+
+                    <button onclick="kuponUygula()">Kuponu Uygula</button>
+
+                    <small id="kuponMesaj"></small>
+                </div>
+
+                <!-- Ödeme -->
+                <button onclick="odemeSayfasi()">
+                    Güvenli Ödeme
+                </button>
+
+                <a href="/market">Alışverişe Devam Et</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+function kuponUygula() {
+  const kod = document.getElementById("kuponGiris").value.trim();
+  const mesaj = document.getElementById("kuponMesaj");
+
+  fetch("/api/sepet/kupon", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ kod })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.error) {
+      mesaj.style.color = "red";
+      mesaj.textContent = data.error;
+    } else {
+      mesaj.style.color = "green";
+      mesaj.textContent = data.mesaj;
+      location.reload(); // sepet yeniden hesaplanır
+    }
+  });
+}
+
+function odemeSayfasi() {
+    window.location.href = "/odeme";
+}
+</script>
+
+</body>
+</html>
