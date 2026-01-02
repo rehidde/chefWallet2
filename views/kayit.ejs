@@ -232,7 +232,7 @@ document.querySelector("#signup-form form").addEventListener("submit", async fun
     }
 
     try {
-        const res = await fetch("https://chefwallet2.onrender.com/register", {
+        const res = await fetch("https://chefwallet2.onrender.com/kayit", {
             method: "POST",
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify({ username: name, email: email, password: password })
